@@ -1,0 +1,5 @@
+2022-12-14 01:29:56.136  WARN 6068 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4h22m53s865ms205µs500ns).
+2022-12-14 06:22:05.167  WARN 6068 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=57m35s860ms7µs600ns).
+2022-12-14 06:25:40.608  WARN 6068 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m35s383ms885µs800ns).
+2022-12-14 13:48:00.241  WARN 6068 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h9m13s599ms489µs100ns).
+2022-12-14 16:18:08.104  WARN 6068 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=22m35s989ms991µs100ns).
