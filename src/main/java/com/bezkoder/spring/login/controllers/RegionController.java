@@ -12,9 +12,13 @@ package com.bezkoder.spring.login.controllers;
 */
 
 import com.bezkoder.spring.login.configuration.SaveImage;
+import com.bezkoder.spring.login.models.CommentRegion;
 import com.bezkoder.spring.login.models.Pays;
 import com.bezkoder.spring.login.models.Region;
+import com.bezkoder.spring.login.repository.CommentRegionRepository;
 import com.bezkoder.spring.login.repository.PaysRepository;
+import com.bezkoder.spring.login.repository.RegionRepository;
+import com.bezkoder.spring.login.security.services.CommentRegionService;
 import com.bezkoder.spring.login.security.services.HabitantService;
 import com.bezkoder.spring.login.security.services.RegionService;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -38,8 +42,11 @@ import java.util.List;
 public class RegionController {
 
     private final PaysRepository paysRepository;
+    private final RegionRepository regionRepository;
     private final RegionService regionservice;//final permet rendre regionServices inchangeable
     private final HabitantService habitantservices;
+    private final CommentRegionService commentRegionService;
+    private final CommentRegionRepository commentRegionRepository;
 
     @ApiOperation(value = "AJOUT DES DONNEES DANS LA TABLE REGION")
     //décrit une opération ou généralement une méthode HTTP par rapport à un chemin spécifique.
@@ -58,7 +65,7 @@ public class RegionController {
             region = new JsonMapper().readValue(reg, Region.class);
             if (file != null) {
                 System.out.println("ggggg");
-                region.setImage(SaveImage.save("activite", file, region.getNomregion()));
+                region.setImage(SaveImage.save("activite", file, region.getNom()));
             }
 
             if (pays != null){
@@ -87,7 +94,7 @@ public class RegionController {
             region = new JsonMapper().readValue(reg, Region.class);
             if (file != null) {
                 System.out.println("verfions si le selectionner n'est pas null");
-                region.setImage(SaveImage.save("activite", file, region.getNomregion()));
+                region.setImage(SaveImage.save("activite", file, region.getNom()));
             }
             return regionservice.modifier(id, region);
         } catch (Exception e) {
@@ -117,6 +124,11 @@ public class RegionController {
     @GetMapping("/liste_region")
     public List<Region> read() {
         return regionservice.lire1();
+    }
+
+    @GetMapping("/liste_regionid/{nom}")
+    public Region readById(@PathVariable("nom") String nom) {
+        return regionRepository.findByNom(nom);
     }
 
     @ApiOperation(value = "LISTE DES REGIONS SANS PAYS")
@@ -150,5 +162,23 @@ public class RegionController {
     @DeleteMapping("/supprimer_region/{identifiant_region}")
     public String delete(@PathVariable Long identifiant_region) {
         return regionservice.supprimer(identifiant_region);
+    }
+
+    //METHODE PERMETTANT DE COMMENTER UNE REGION
+    @PostMapping("/comment")
+    public CommentRegion addComment(@RequestBody CommentRegion commentRegion){
+        return commentRegionService.creer(commentRegion);
+    }
+
+    //METHODE PERMETTANT DE COMMENTER UNE REGION
+    @GetMapping("/lireComment")
+    public List<CommentRegion> getComment(){
+        return commentRegionService.lire();
+    }
+
+    @GetMapping("/lireCommentbyID/{idRegion}")
+    public List<CommentRegion> getComment(@PathVariable("idRegion") String id){
+        Region region = regionRepository.findByNom(id);
+        return commentRegionRepository.findByIdRegion(region);
     }
 }

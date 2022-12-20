@@ -14,8 +14,8 @@ public class SaveImage {
     public static String serveruser = localhost + "apigestionregion/images/utilisateurs/";
     public static String serveractivite = localhost + "apigestionregion/images/activites/";
 
-    public static String Activitelocation = "C:/xampp/htdocs/erpodk/images/activites";
-    public static String Userlocation = "C:/xampp/htdocs/erpodk/images/utilisateurs";
+    public static String Activitelocation = "C:/xampp/htdocs/apigestionregion/images/activites";
+    public static String Userlocation = "C:/xampp/htdocs/apigestionregion/images/utilisateurs";
 
     public static String save(String typeImage, MultipartFile file, String nomFichier) {
         String src = "";

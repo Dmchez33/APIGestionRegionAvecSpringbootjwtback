@@ -22,4 +22,6 @@ public interface RegionService {
     Region modifier(Long id, Region regions);
     //methode permettant de de supprimer une region
     String supprimer(Long id);
+    //RECUPERATION D'UNE REGION PAR SON ID
+    Region lireRegionById(String nom);
 }

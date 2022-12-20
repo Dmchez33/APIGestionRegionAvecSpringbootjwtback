@@ -13,7 +13,7 @@ public interface RegionRepository extends JpaRepository<Region, Long> {
      * Definition des requetes native pour selection des region sans pays et avec pays
      *
      * */
-    Region findByNomregion(String nom);
+    Region findByNom(String nom);
     //@Query(value = "INSERT INTO Regions (code_region, nom_region, domaine_activite, superficie, langue_majoritaire, idpays, ")
     //Region sans pays
     @Query(value = "SELECT code_region,nom_region,domaine_activite,superficie,langue_majoritaire FROM regions", nativeQuery = true )

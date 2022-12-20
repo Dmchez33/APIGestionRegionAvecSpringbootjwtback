@@ -58,4 +58,9 @@ public class RegionServiceImpl implements RegionService {
         regionsrepository.deleteById(id);
         return "Region supprimé";
     }
+
+    @Override
+    public Region lireRegionById(String nom) {
+        return regionsrepository.findByNom(nom);
+    }
 }

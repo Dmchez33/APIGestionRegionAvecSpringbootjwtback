@@ -26,6 +26,8 @@ public class LieuxTouristiquesController {
 
     final private RegionRepository regionRepository;
 
+    final private LieuxTouristiquesRepository lieuxTouristiquesRepository;
+
     @PostMapping("/ajout_Lieux/{nomRegion}")
     public Object creer(
             @PathVariable("nomRegion") String nomRegion,
@@ -37,9 +39,11 @@ public class LieuxTouristiquesController {
                 System.out.println("ggggg");
                 lieuxTouristique.setImage(SaveImage.save("activite", file, lieuxTouristique.getNom()));
             }
-            Region region = regionRepository.findByNomregion(nomRegion);
+            Region region = regionRepository.findByNom(nomRegion);
+            System.err.println(region);
 
             if (region != null){
+                System.out.println("region don't null");
                 lieuxTouristique.setIdRegion(region);
             }
             return lieuxTouristiqueService.creer(lieuxTouristique);
@@ -69,6 +73,20 @@ public class LieuxTouristiquesController {
     public List<LieuxTouristique> listerListe(){
         return lieuxTouristiqueService.lire();
     }
+
+    @GetMapping("/list_lieuxbyNomRegion/{nom}")
+    public List<LieuxTouristique> listerListeby(@PathVariable String nom){
+        Region region = regionRepository.findByNom(nom);
+        System.err.println("--------------------------------------");
+        System.err.println(region);
+        return lieuxTouristiquesRepository.findByIdRegion(region);
+    }
+
+
+
+
+
+
     @DeleteMapping("/supprimerLieux/{id}")
     public String delete(@PathVariable Long id) {
         return lieuxTouristiqueService.supprimer(id);

@@ -32,7 +32,7 @@ public class Region {
         private String image;
 
         @Column(unique = true, length = 50)
-        private String nomregion;
+        private String nom;
 
         //JOINTURE ENTRE LA TABLE REGION ET PAYS
         @ManyToOne
