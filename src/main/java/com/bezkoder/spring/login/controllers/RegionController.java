@@ -181,4 +181,9 @@ public class RegionController {
         Region region = regionRepository.findByNom(id);
         return commentRegionRepository.findByIdRegion(region);
     }
+
+    @DeleteMapping("/suprimer/{id}")
+    public String suprimer(@PathVariable Long id){
+        return this.commentRegionService.supprimer(id);
+    }
 }

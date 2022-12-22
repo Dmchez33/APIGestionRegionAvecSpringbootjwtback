@@ -22,4 +22,9 @@ public class CommentRegionController {
     public CommentRegion modifier(@PathVariable Long id, @RequestBody CommentRegion commentRegion){
         return commentRegionService.modifier(id,commentRegion);
     }
+
+    @DeleteMapping("/suprimer/{id}")
+    public String suprimer(@PathVariable Long id){
+        return this.commentRegionService.supprimer(id);
+    }
 }

@@ -73,7 +73,7 @@ public class AuthController {
     return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
         .body(new UserInfoResponse(userDetails.getId(),
                                    userDetails.getUsername(),
-                                   userDetails.getEmail(),
+                                   userDetails.getTelephone(),
                                    roles));
   }
 
@@ -83,13 +83,13 @@ public class AuthController {
       return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
     }
 
-    if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+    if (userRepository.existsByTelephone(signUpRequest.getTelephone())) {
       return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
     }
 
     // Create new user's account
     User user = new User(signUpRequest.getUsername(),
-                         signUpRequest.getEmail(),
+                         signUpRequest.getTelephone(),
                          encoder.encode(signUpRequest.getPassword()));
 
     Set<String> strRoles = signUpRequest.getRole();

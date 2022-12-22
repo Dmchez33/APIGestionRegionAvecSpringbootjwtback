@@ -82,6 +82,13 @@ public class LieuxTouristiquesController {
         return lieuxTouristiquesRepository.findByIdRegion(region);
     }
 
+    //METHODE PERMETTANT DE LISTER UN LIEUX PAR SON ID
+    @GetMapping("/liste/{id}")
+    public LieuxTouristique lister(@PathVariable Long id){
+        System.err.println(this.lieuxTouristiquesRepository.findById(id).get());
+        return this.lieuxTouristiquesRepository.findById(id).get();
+
+    }
 
 
 

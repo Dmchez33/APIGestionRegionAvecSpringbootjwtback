@@ -43,7 +43,7 @@ public class SpringBootLoginExampleApplication implements CommandLineRunner {
 			Set<Role> roles = new HashSet<>();
 			Role role = roleRepository.findByName(ERole.ROLE_ADMIN);
 			roles.add(role);
-			User collaborateur = new User("admin","admin@gmail.com",encoder.encode( "12345678"));
+			User collaborateur = new User("admin","83252448",encoder.encode( "12345678"));
 			collaborateur.setRoles(roles);
 			userRepository.save(collaborateur);
 

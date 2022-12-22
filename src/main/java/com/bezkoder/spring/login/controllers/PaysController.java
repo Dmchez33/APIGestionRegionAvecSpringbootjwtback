@@ -4,6 +4,7 @@ package com.bezkoder.spring.login.controllers;
 import com.bezkoder.spring.login.configuration.SaveImage;
 import com.bezkoder.spring.login.models.Pays;
 import com.bezkoder.spring.login.models.Region;
+import com.bezkoder.spring.login.repository.PaysRepository;
 import com.bezkoder.spring.login.security.services.PaysService;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import io.swagger.annotations.Api;
@@ -23,6 +24,9 @@ public class PaysController {
 
     @Autowired
     PaysService paysservice;
+
+    @Autowired
+    private PaysRepository paysRepository;
 
     @ApiOperation(value = "AJOUT DES DONNEES DANS LA TABLE PAYS")
     @PostMapping("/ajout_pays")
@@ -51,8 +55,8 @@ public class PaysController {
 
     @ApiOperation(value = "LISTE PAYS")
     @GetMapping("/liste_pays/{nompays}")
-    public Pays readPaysparNom(@PathVariable String nom) {
-        return paysservice.trouverPaysParId(nom);
+    public Pays readPaysparNom(@PathVariable("nompays") String nom) {
+        return paysRepository.findByNom(nom);
     }
 
     @ApiOperation(value = "MODIFICATION DES DONNEES DE LA TABLE PAYS")
